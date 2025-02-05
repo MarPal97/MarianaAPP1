@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Función f(x)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .precision {
+            margin-top: 10px;
+        }
+        .precision label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .precision input {
+            width: 60px;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Función f(x)</h1>
+        <label for="x">Ingrese el valor de x:</label>
+        <input type="number" id="x" placeholder="Ejemplo: 2.5" step="any">
+        
+        <label for="n">Ingrese el valor de n:</label>
+        <input type="number" id="n" placeholder="Ejemplo: 3" step="any">
+        
+        <div class="precision">
+            <label for="precision">Precisión (cifras significativas):</label>
+            <input type="number" id="precision" value="3" min="1" max="10">
+        </div>
+        
+        <button onclick="calcular()">Calcular</button>
+        
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcular() {
+            // Obtener los valores de x, n y precisión
+            const x = parseFloat(document.getElementById('x').value);
+            const n = parseFloat(document.getElementById('n').value);
+            const precision = parseInt(document.getElementById('precision').value);
+
+            // Validar que los valores sean números
+            if (isNaN(x) || isNaN(n) || isNaN(precision)) {
+                document.getElementById('resultado').textContent = "Por favor, ingrese valores válidos.";
+                return;
+            }
+
+            // Calcular la función f(x) = (2 / (3 + x))^n
+            const resultado = Math.pow(2 / (3 + x), n);
+
+            // Formatear el resultado con la precisión especificada
+            const resultadoFormateado = resultado.toPrecision(precision);
+
+            // Mostrar el resultado
+            document.getElementById('resultado').textContent = `f(${x}) = ${resultadoFormateado}`;
+        }
+    </script>
+</body>
+</html>
